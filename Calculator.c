@@ -1,20 +1,50 @@
 /*
-Filename: ITT-310 C Calculator
+Filename: ITT-310 C Calculator program
 Author: Brody Hicks
-Date: 4/1/2022
-Version: 2.0
-Purpose for release: This release of the calculator will allow for a multifunctional
-interpretation of user input and the choice of mathematica operations including (+,-,* and /)
-In addition to the use of an arrary for the sum of 10 numbers and modularizing the code from the main 
-as a user-defined function to be called from the main program
+Date: 4/8/2022
+Version: 3.0
+Purpose for release: THis release of the C calulator will allow the defining the use of a union and structure that will 
+defined and display the version of the calculator, as well as a character string as my name being the developer. In addition
+the structure will be used as a record for storing and displaying today's current date for day, month and year and display
+it to the console at the top as a header introduction.
 */
 #include <stdio.h> // Main C library preprocessor header file
-#include <errno.h>
+#define _CRT_SECURE_NO_WARNINGS //The use of secure versions for library functions
 
 void calc(); // Define my modularity for the user-defined function
- 
+
 void calc() //Main function start of the program
 {
+	union Data { //Union to display general data information for the version and a defined character string to be displayed
+		float version;
+		char string[100];
+	};
+
+	// A typedef data structure called date to display the current month, day and year as an official date of the program as a header description  
+	typedef struct
+	{
+		int month; //Defined the month integer
+		int day; //Defined day integer
+		int year; //Defined year integers
+	}Date; //Name of the structure
+
+	//Create an instance of the date today for the structure
+	Date today;
+
+	//Populate the Date Structure with the integers for the month, day and year specified as 04/8/2022
+	today.month = 04;
+	today.day = 8;
+	today.year = 2022;
+
+	union Data data; //Call the union for data
+	data.version = 1.03; //Define the union data version to be displayed
+	printf("version : %1.2f\n", data.version); //Print the Version as 1.03
+	strcpy(data.string, "Brody Rantz Hicks"); //Copy the character string to be my name as the developer
+	printf("Developed by : %s\n", data.string); //displays the character string as my full name Brody Rantz Hicks
+
+	// Print the contents of the Data Structure as the full date today
+	printf_s("The date today is %i/%i/%.2i.\n", today.month, today.day, today.year % 100);
+
 	int a , b,choice; //Declaring integer variables and data types, as well as choice for decision
 	int c[10], i;
 	int s = 0;
@@ -62,7 +92,8 @@ int main() {
 	//Define my loop variable set to 1
 	int d = 1;
 	calc(); // Call the user-defined function
-	while (d == 1) { // While loop for the recursive operation for the user to restart the program
+	while (d == 
+		) { // While loop for the recursive operation for the user to restart the program
 		printf("\nWould you like to try again (1 for yes, all other numbers for No): ");
 		scanf_s("%d", &d);
 		if (d == 1) { // If user inputs #1 1 the program will restart, else the program will end.
