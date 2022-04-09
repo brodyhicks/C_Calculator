@@ -27,13 +27,14 @@ void calc() //Main function start of the program
 		int day; //Defined day integer
 		int year; //Defined year integers
 	}Date; //Name of the structure
+	// A typedef stucture to display the time both hours and minutes inputted
 	typedef struct 
 	{
-		int hour;
-		int minute;
-	}time;
+		int hour; //Define the hours
+		int minute;//Define the minute
+	}time;//Time is the name of the structure to be called
 
-	//Create an instance of the date today for the structure
+	//Create an instance of the date today and the time for the two structures
 	Date today;
 	time now;
 
@@ -41,7 +42,7 @@ void calc() //Main function start of the program
 	today.month = 04;
 	today.day = 8;
 	today.year = 2022;
-
+	//Populate the time structure with the specfied integers for the inputted time for the hour and minutes as 5:09 pm
 	now.hour = 5;
 	now.minute = 9;
 
@@ -50,10 +51,11 @@ void calc() //Main function start of the program
 	printf("version : %1.2f\n", data.version); //Print the Version as 1.03
 	strcpy(data.string, "Brody Rantz Hicks"); //Copy the character string to be my name as the developer
 	printf("Developed by : %s\n", data.string); //displays the character string as my full name Brody Rantz Hicks
-	strcpy(data.string, "Welcome to the best calculator for students to learn math operations!!!");
-	printf("General info:  %s\n", data.string);
+	strcpy(data.string, "Welcome to the best calculator for students to learn math operations!!!"); //Copythe data string as 
+	//the welcome to the calculator
+	printf("General info:  %s\n", data.string); //Display the character string as the welcome banner to the calculator
 
-	// Print the contents of the Data Structure as the full date today
+	// Print the contents of the Data Structure as the full date today, as well as the time
 	printf_s("The date today is %i/%i/%.2i.\n", today.month, today.day, today.year % 100);
 	printf_s("The time this was made was %01d:%02d pm\n\n",now.hour, now.minute % 100);
 	
@@ -70,23 +72,23 @@ void calc() //Main function start of the program
 		scanf_s("%d", &b);
 
 
-		printf("\nMultiply(1), Divide(2), Subract(3), Add(4), Sum(5): "); //Prompts user to choose an operator to perform calculation
+		printf("\nMultiply(1), Divide(2), Subract(3), Add(4), Sum(5):  \n"); //Prompts user to choose an operator to perform calculation
 		// with the addition of the arrary for the sum of 10 numbers
 		scanf_s("%d", &choice);
 
 		switch (choice) //decision switch choice
 		{
 		case(1):
-			printf("%d * %d = %d\n", a, b, (a * b)); //Will multiply the 2 numbers inputted
+			printf("\n%d * %d = %d\n", a, b, (a * b)); //Will multiply the 2 numbers inputted
 			break;
 		case(2):
-			printf("%d / %d = %d\n", a, b, (a / b));//Will divide 2 numbers inputted
+			printf("\n%d / %d = %d\n", a, b, (a / b));//Will divide 2 numbers inputted
 			break;
 		case(3):
-			printf("%d - %d = %d\n", a, b, (a - b)); //Will subtract 2 numbers inputted
+			printf("\n%d - %d = %d\n", a, b, (a - b)); //Will subtract 2 numbers inputted
 			break;
 		case(4):
-			printf("%d + %d = %d\n", a, b, (a + b)); //Will add 2 numbers inputted
+			printf("\n%d + %d = %d\n", a, b, (a + b)); //Will add 2 numbers inputted
 			break;
 		case(5):
 			for (i = 0; i < 10; i++) { // For loop for the array starting at 0, with incremental inputs of 10 digits to do the sum
@@ -104,8 +106,9 @@ int main() {
 	//Define my loop variable set to 1
 	int d = 1;
 	calc(); // Call the user-defined function
+	printf("\nGreat Job!! I hoped you enjoyed and got the anwser you were looking for!!!\n");
 	while (d == 1) { // While loop for the recursive operation for the user to restart the program
-		printf("\nWould you like to try again (1 for yes, all other numbers for No): ");
+		printf("\nWould you like to try again (1 for yes, all other numbers for No):  \n");
 		scanf_s("%d", &d);
 		if (d == 1) { // If user inputs #1 1 the program will restart, else the program will end.
 			calc(); //If selected 1, recall the user-defined function 
