@@ -14,7 +14,7 @@ it to the console at the top as a header introduction.
 #include <ctype.h>
 #include <errno.h>
 #include <time.h>
-#include <Windows.h>
+#include <Windows.h> 
 
 void calc(); // Define my modularity for the user-defined function
 
