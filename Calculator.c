@@ -8,13 +8,11 @@ defined and display the version of the calculator, as well as a character string
 the structure will be used as a record for storing and displaying today's current date for day, month and year and display
 it to the console at the top as a header introduction.
 */
+
 #include <stdlib.h>
-#include <stdio.h> // Main C library preprocessor header file
-#define _CRT_SECURE_NO_WARNINGS //The use of secure versions for library functions
-#include <ctype.h>
-#include <errno.h>
+#include <stdio.h> // Main C library preprocessor header  //The use of secure versions for library functions
 #include <time.h>
-#include <Windows.h> 
+#define _CRT_SECURE_NO_WARNINGS
 
 void calc(); // Define my modularity for the user-defined function
 
@@ -78,7 +76,7 @@ void calc() //Main function start of the program
 	// Print the contents of the Data Structure as the full date today, as well as the time
 	printf("The date today is %i/%i/%.2i.\n", today.month, today.day, today.year % 100);
 	printf("The time this was made was %01d:%02d pm\n\n",now.hour, now.minute % 100);
-	
+
 	int a, b, choice;//Declaring integer variables and data types, as well as choice for decision
 	int c[10], i;
 	int s = 0;
@@ -136,12 +134,54 @@ void calc() //Main function start of the program
 	
 	}
 }
+
+void copy_files(FILE* in, FILE* out)
+{
+	int c;
+
+	//Copy all the characters from the input file to the output file
+	while ((c = getc(in)) != EOF)
+		putc(c, out);
+}
+
 // Main function for the program for the execution and calling of the defined function for the calculator
-int main() {
-	//Define my loop variable set to 1
+int main(int argc, char* argv[]) {
+//Define my loop variable set to 1
 	int d = 1;
 	calc(); // Call the user-defined function
-	printf("\nGreat Job!! I hoped you enjoyed and got the anwser you were looking for!!!\n");
+
+	FILE* in, * out;
+	errno_t err;
+
+	//Check for program input arguments: Program name, input filename and output filename
+	if (argc != 3)
+	{
+		fprintf(stderr, "Please enter two file names.\n");
+		return 1;
+	}
+
+	//Open input file for reading
+	if ((err = fopen_s(&in, argv[1], "r")) != 0)
+	{
+		fprintf(stderr, "Can't read from input file %s.\n", argv[1]);
+		return 2;
+	}
+
+	//Open output file for writing
+	if ((err = fopen_s(&out, argv[2], "w")) != 0)
+	{
+		fprintf(stderr, "Can't write to output file %s.\n", argv[2]);
+		return 3;
+	}
+
+	//Copy all the characters from the input file to the output file
+	copy_files(in, out);
+	printf("File has been copied.\n");
+
+	//Cleanup and close all the open files
+	fclose(in);
+	fclose(out);
+
 	while (d == 1) { // While loop for the recursive operation for the user to restart the program
 		printf("\nWould you like to try again (1 for yes, all other numbers for No):  \n");
 		scanf_s("%d", &d);
