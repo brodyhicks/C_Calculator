@@ -1,21 +1,22 @@
 /*
-Filename: ITT-310 C Calculator program
+Filename: ITT-310 C Calculator Final program
 Author: Brody Hicks
-Date: 4/8/2022
-Version: 3.0
-Purpose for release: THis release of the C calulator will allow the defining the use of a union and structure that will 
-defined and display the version of the calculator, as well as a character string as my name being the developer. In addition
-the structure will be used as a record for storing and displaying today's current date for day, month and year and display
-it to the console at the top as a header introduction.
+Date: 4/22/2022
+Version: 4.0
+Purpose for release: This is the final release in developing a command-interface C Calculator. The purpose of this program is to incorporate the use of File I/O in which copies files from one file
+to another, in addition to performing the mathematical computation for addition, subtraction, multiplication, division and the sum of 10 numbers. The beggining with provide a introduction to
+the program with the developers name, date, time and a general informational description to the calculator!!!
 */
 
+//Preprocessor header files for the compiler execution 
 #include <stdlib.h>
 #include <stdio.h> // Main C library preprocessor header  //The use of secure versions for library functions
 #include <time.h>
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS //Use for security in the deprecation of functions and variables
 
 void calc(); // Define my modularity for the user-defined function
 
+//User-function for the use of a delay time before clearing the screen
 void delay(int number_of_seconds)
 {
 	// Converting time into milli_seconds
@@ -30,8 +31,8 @@ void delay(int number_of_seconds)
 
 void calc() //Main function start of the program
 { 
-	delay(2);
-	system("cls");
+	delay(2); //Time delay for system clear screen
+	system("cls"); //Call for system clear screen for restart
 	union Data { //Union to display general data information for the version and a defined character string to be displayed
 		float version;
 		char name[100];
@@ -85,14 +86,15 @@ void calc() //Main function start of the program
 
 		printf("Please enter your first number: \n"); //Asks user to input first integer and sets to memory
 		scanf_s("%d", &a);
+		//If loop for error-handlings and compiler correction for invalid user-input
 		if (a == 0) {
 			printf("Thats boring, pick something other then 0, jeeeez haha!!\n");
 			printf("This is an invalid choice!!You can't do any math with 0\n");
-			calc();
+			calc(); //Restarts the program at the top
 		}
 		printf("Please enter your second number: \n"); //Asks user for second number and sets to memory
 		scanf_s("%d", &b);
-
+		//If loop for error-handlings and compiler correction for invalid user-input
 		if (b == 0) {
 			printf("Thats boring, pick something other then 0, jeeeez haha!!\n");
 			printf("This is an invalid choice!!You can't do any math with 0\n");
@@ -101,7 +103,7 @@ void calc() //Main function start of the program
 		printf("\nMultiply(1), Divide(2), Subract(3), Add(4), Sum(5):  \n"); //Prompts user to choose an operator to perform calculation
 		// with the addition of the arrary for the sum of 10 numbers
 		scanf_s("%d", &choice);
-
+		//If loop for error-handlings and compiler correction for invalid user-input for the choice selection for math solutions
 		if (choice > 5) {
 			printf("This is an invalid choice!!Must input a value between 1-5\n");
 			calc();
@@ -134,10 +136,10 @@ void calc() //Main function start of the program
 	
 	}
 }
-
+//User function to perform the copying of the input to output test files with a string
 void copy_files(FILE* in, FILE* out)
 {
-	int c;
+	int c; //Declare the integer C
 
 	//Copy all the characters from the input file to the output file
 	while ((c = getc(in)) != EOF)
@@ -150,8 +152,8 @@ int main(int argc, char* argv[]) {
 	int d = 1;
 	calc(); // Call the user-defined function
 
-	FILE* in, * out;
-	errno_t err;
+	FILE* in, * out; //Input/output file pointers
+	errno_t err; //Declare error and debugging scenarios for test cases
 
 	//Check for program input arguments: Program name, input filename and output filename
 	if (argc != 3)
